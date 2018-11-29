@@ -1,5 +1,7 @@
 <?php
 
+// This file is part of Moodle - http://moodle.org/
+//
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -14,14 +16,28 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Course rollover plugin
+ * Course Rollover - Privacy Subsystem implementation
+ *
  * @package   courserollover
- * @copyright 2014 Oxford Brookes University
+ * @copyright 2018 Oxford Brookes University
  * @author    Peter Andrew
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['privacy:metadata'] = 'The Course Roll-over plugin does not store any personal data.';
+namespace local_courserollover\privacy;
 
-$string['pluginname'] = 'Course roll-over';
-$string['courserollover'] = 'Course roll-over';
+defined('MOODLE_INTERNAL') || die();
+
+// Privacy Subsystem implementing null_provider
+class provider implements \core_privacy\local\metadata\null_provider {
+
+    /**
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return  string
+     */
+    public static function get_reason() : string {
+        return 'privacy:metadata';
+    }
+}
